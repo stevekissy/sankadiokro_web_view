@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #174a35;
+  --color-forest-dark: #0f3324;
+  --color-forest-light: #1f6247;
+  --color-gold: #d5a547;
+  --color-gold-dark: #b8892f;
+  --color-gold-light: #f0d48a;
+  --color-cream: #fff8eb;
+  --color-cream-dark: #f6ecd6;
+  --color-ink: #242424;
+  --color-ink-soft: #5a5a5a;
+
+  --font-display: var(--font-playfair), "Georgia", serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  --shadow-soft: 0 10px 40px -12px rgb(23 74 53 / 0.18);
+  --shadow-card: 0 4px 24px -6px rgb(36 36 36 / 0.12);
+  --shadow-gold: 0 10px 30px -10px rgb(213 165 71 / 0.6);
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-ink);
+}
+
+/* Motif décoratif discret (tissu / pagne) */
+.pattern-kente {
+  background-image:
+    linear-gradient(135deg, rgb(213 165 71 / 0.08) 25%, transparent 25%),
+    linear-gradient(225deg, rgb(213 165 71 / 0.08) 25%, transparent 25%),
+    linear-gradient(45deg, rgb(213 165 71 / 0.08) 25%, transparent 25%),
+    linear-gradient(315deg, rgb(213 165 71 / 0.08) 25%, transparent 25%);
+  background-position: 20px 0, 20px 0, 0 0, 0 0;
+  background-size: 40px 40px;
+}
+
+.pattern-dots {
+  background-image: radial-gradient(rgb(23 74 53 / 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.text-balance { text-wrap: balance; }
+
+/* Barres de défilement discrètes pour les carrousels horizontaux */
+.scrollbar-none { scrollbar-width: none; }
+.scrollbar-none::-webkit-scrollbar { display: none; }
+
+/* Classes de formulaire (dans la couche components pour rester surchargeables par les utilitaires) */
+@layer components {
+  .input {
+    @apply w-full rounded-xl border border-ink/15 bg-white px-4 py-3 text-ink placeholder:text-ink/40 outline-none transition focus:border-forest focus:ring-4 focus:ring-forest/10 disabled:cursor-not-allowed disabled:bg-cream-dark;
+  }
+  .label {
+    @apply mb-1.5 block text-sm font-medium text-ink;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
